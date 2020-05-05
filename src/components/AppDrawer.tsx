@@ -1,62 +1,66 @@
-import React, { FC } from 'react';
-import { Drawer, Toolbar, makeStyles } from '@material-ui/core';
-import { Edge, Menu, Item } from '../types.js';
+import React, { FC, useState } from 'react';
+import { makeStyles, Theme, Hidden, Fab } from '@material-ui/core';
+import { UnfoldMore } from '@material-ui/icons';
+import { drawerWidth, CategoryList } from '../types';
 import SideMenuBar from './SideMenuBar';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
-    width: 150,
-    flexShrink: 0
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    }
   },
-  drawerPaper: {
-    width: 150
+  smallScreenSideBar: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    },
+    position: 'fixed',
+    right: theme.spacing(5),
+    bottom: theme.spacing(5),
   }
 }));
 
-const getMenuList = (edges: Edge[]) => {
-  const menuList = edges.reduce<Menu[]>((acc, target) => {
-    const category = target.node.fields.category;
-    const item: Item = {
-      slug: target.node.fields.slug,
-      title: target.node.frontmatter.title
-    };
-
-    if (acc.some(v => v.category === category)) {
-      acc.forEach(v => {
-        if (v.category === category) v.items.push(item);
-      });
-    } else {
-      acc.push({
-        category: category,
-        items: [item]
-      });
-    }
-
-    return acc;
-  }, []);
-  return menuList;
-}
-
 type Props = {
-  edges: Edge[],
+  categoryList: CategoryList
   activePath: string
 }
 
-const AppDrawer: FC<Props> = ({ edges, activePath }) => {
+const AppDrawer: FC<Props> = ({ categoryList, activePath }) => {
   const classes = useStyles();
-  const menuList = getMenuList(edges);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   return (
-    <Drawer 
-      className={classes.drawer} 
-      variant="permanent" 
-      classes={{
-        paper: classes.drawerPaper
-      }}
-    >
-      <Toolbar />
-      <SideMenuBar menuList={menuList} activePath={activePath} />
-    </Drawer>
+    <nav className={classes.drawer}>
+      <Hidden smUp>
+        <SideMenuBar 
+          variant="temporary" 
+          open={open} 
+          categoryList={categoryList} 
+          activePath={activePath} 
+          onClose={handleOpen} 
+        />
+      </Hidden>
+      <Hidden xsDown>
+        <SideMenuBar 
+          variant="permanent" 
+          open={true} 
+          categoryList={categoryList} 
+          activePath={activePath} 
+        />
+      </Hidden>
+      <div className={classes.smallScreenSideBar}>
+        {!open && 
+          <Fab size="large" onClick={handleOpen}>
+            <UnfoldMore color="secondary" fontSize="large" />
+          </Fab>
+        }
+      </div>
+    </nav>
   );
 };
 

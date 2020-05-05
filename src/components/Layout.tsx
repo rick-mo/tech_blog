@@ -1,46 +1,34 @@
 import React from 'react';
-import { ThemeProvider, CssBaseline, createMuiTheme, makeStyles, Theme, Toolbar } from '@material-ui/core';
-import Header from './Header';
+import { ThemeProvider, CssBaseline, makeStyles, Theme } from '@material-ui/core';
 import AppDrawer from './AppDrawer';
-import { Edge } from '../types';
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'light',
-  },
-  typography: {
-    fontFamily: 'HiraKakuPro-W6',
-    fontSize: 12
-  },
-});
+import { drawerWidth, CategoryList } from '../types';
+import { myTheme } from '../theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(4),
+    width: `calc(100% - ${drawerWidth})`,
   }
 }));
 
 type Props = {
-  edges?: Edge[]
+  categoryList: CategoryList
   activePath?: string
 }
 
-const Layout: React.FC<Props> = ({ edges, activePath, children }) => {
+const Layout: React.FC<Props> = ({ categoryList, activePath = '', children }) => {
   const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <ThemeProvider theme={myTheme}>
       <div className={classes.root}>
-        <Header />
-        {(edges || activePath) &&
-          <AppDrawer edges={edges} activePath={activePath} />}
+        <CssBaseline />
+        <AppDrawer categoryList={categoryList} activePath={activePath} />
         <main className={classes.content}>
-          <Toolbar />
           {children}
         </main>
       </div>

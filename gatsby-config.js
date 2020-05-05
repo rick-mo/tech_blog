@@ -39,6 +39,11 @@ module.exports = {
         ]
       }
     },
-    `gatsby-plugin-typescript`
+    {
+      resolve: `gatsby-plugin-typescript`,
+      options: {
+        isTsx: true
+      }
+    }
   ]
 }

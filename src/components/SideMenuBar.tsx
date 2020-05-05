@@ -1,31 +1,51 @@
 import React, { FC } from 'react';
-import { List, makeStyles } from '@material-ui/core';
-import { Menu } from '../types';
-import CategoryMenu from './CategoryMenu';
+import { makeStyles, Drawer, Theme, Typography, Divider } from '@material-ui/core';
+import CustomLink from './CustomLink';
+import { drawerWidth, CategoryList } from '../types';
+import SideMenuList from './SideMenuList';
 
-type Props = {
-  menuList: Menu[],
-  activePath: string
-}
-
-const useStyles = makeStyles(() => ({
-  drawerContainer: {
-    overflow: 'auto'
-  }
+const useStyles = makeStyles((theme: Theme) => ({
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  title: {
+    padding: theme.spacing(2)
+  },
 }));
 
-const SideMenuBar: FC<Props> = ({ menuList, activePath }) => {
+type Props = {
+  variant: "permanent" | "temporary"
+  open: boolean
+  onClose?: () => void
+  categoryList: CategoryList
+  activePath: string
+};
+
+const SideMenuBar: FC<Props> = ({ variant, open, onClose, categoryList, activePath }) => {
   const classes = useStyles();
+
   return (
-    <List className={classes.drawerContainer}>
-      {menuList.map((menu, index) => (
-        <CategoryMenu 
+    <Drawer 
+      variant={variant} 
+      classes={{
+        paper: classes.drawerPaper
+      }}
+      open={open}
+      onClose={onClose}
+    >
+      <Typography className={classes.title} variant="h6">
+        <CustomLink to="/">Tech Memo</CustomLink>
+      </Typography>
+      <Divider />
+      {Object.keys(categoryList).map((category, index) => (
+        <SideMenuList 
           key={index} 
-          menu={menu} 
+          category={category} 
+          tagList={categoryList[category]} 
           activePath={activePath} 
         />
       ))}
-    </List>
+    </Drawer>
   );
 };
 

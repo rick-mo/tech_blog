@@ -2,20 +2,26 @@ import React, { FC } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout';
 import { AllMarkdownRemark } from '../types';
+import { Card, CardContent } from '@material-ui/core';
+import { getCategoryList } from '../utils/getCategoryList';
 
 type Props = {
   data: AllMarkdownRemark
-  location: Location
-}
+};
 
-const IndexPage: FC<Props> = ({ data, location }) => {
-  const edges = data.allMarkdownRemark.edges;
+const IndexPage: FC<Props> = ({ data }) => {
+  const categoryList = getCategoryList(data.allMarkdownRemark);
 
   return (
-    <Layout edges={edges} activePath={location.pathname}>
-      <p>当サイトは、サイト管理者が日常で得たIT知識を備忘録も兼ねてまとめたサイトです。</p>
+    <Layout categoryList={categoryList} activePath={location.pathname}>
+      <Card>
+        <CardContent>
+          当サイトは、サイト管理者が日常で得たIT知識を備忘録も兼ねてまとめたサイトです。
+          {/* Gatsby製サイト */}
+        </CardContent>
+      </Card>
     </Layout>
-  )
+  );
 };
 
 export const query = graphql`
@@ -24,14 +30,15 @@ export const query = graphql`
       edges {
         node {
           fields {
-            category
-            slug
+            tagKey
           }
           frontmatter {
+            path
+            category
+            tag
             title
-            date(formatString: "YYYY/MM/DD")
+            date
           }
-          html
         }
       }
     }

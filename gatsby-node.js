@@ -6,13 +6,13 @@ exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;
 
   if (node.internal.type === 'MarkdownRemark') {
-    const category = basename(resolve(node.fileAbsolutePath, '..'));
+    const tagKey = basename(resolve(node.fileAbsolutePath, '..'));
     const slug = basename(node.fileAbsolutePath, '.md');
 
     createNodeField({
       node,
-      name: 'category',
-      value: category
+      name: 'tagKey',
+      value: tagKey
     });
     createNodeField({
       node,
@@ -24,31 +24,61 @@ exports.onCreateNode = ({ node, actions }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const blogTemplate = resolve('./src/template/page.tsx');
+  const tagTemplate = resolve(__dirname, './src/template/tag.tsx');
+  const articleTemplate = resolve(__dirname, './src/template/article.tsx');
+
   const response = await graphql(`
     query {
       allMarkdownRemark {
         edges {
           node {
             fields {
-              category
+              tagKey
               slug
+            }
+            frontmatter {
+              path
+              category
+              tag
+              title
             }
           }
         }
       }
     }
   `);
-  
-  response.data.allMarkdownRemark.edges.forEach(edge => {
+
+  if (response.errors) {
+    console.log(response.errors);
+    throw Error(response.errors);
+  }
+
+  const edges = response.data.allMarkdownRemark.edges;
+
+  const tagList = edges.reduce((acc, { node }) => {
+    if (!acc[node.fields.tagKey])
+      acc[node.fields.tagKey] = node.frontmatter.tag;
+    return acc;
+  }, {});
+
+  Object.keys(tagList).forEach(tag => {
     createPage({
-      component: blogTemplate,
-      path: `/${edge.node.fields.category}/${edge.node.fields.slug}`,
+      component: tagTemplate,
+      path: `/${tag}`,
       context: {
-        category: edge.node.fields.category,
-        slug: edge.node.fields.slug
+        tag: tag,
+        tagName: tagList[tag]
       }
     });
   });
-}
 
+  edges.forEach(({ node }) => {
+    createPage({
+      component: articleTemplate,
+      path: node.frontmatter.path,
+      context: {
+        slug: node.fields.slug
+      }
+    });
+  });
+};

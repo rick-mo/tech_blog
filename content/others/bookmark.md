@@ -1,17 +1,13 @@
 ---
-title: "ブックマーク一覧"
-date: "2020-04-27"
+path: "/others/bookmark"
+category: "その他"
+tag: "その他"
+title: "参考記事まとめ"
+date: "2020-04-26"
 ---
 
-|Byte|内容|
-|:--|:--:|
-|0|フレーム ID|
-|1|*|
-|2|*|
-|3|サイズ|
-|4|*|
-|5|*|
-|6|未使用|
-|7|*|
-|8|*|
-|9|*|
+## JavaScript関連
+
+|サイト|内容|
+|:--:|:--:|
+| [モダンJavaScript概論 − Node, npm, ECMAScript, Babel, Webpack](https://www.hypertextcandy.com/modern-javascript/)||

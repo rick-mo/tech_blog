@@ -1,34 +1,39 @@
 
+// use GraphQL type
+
 export type Node = {
   fields: {
-    category: string,
+    tagKey: string
     slug: string
-  },
+  }
   frontmatter: {
-    title: string,
-    date: string,
-  },
+    path: string
+    category: string
+    tag: string
+    title: string
+    date: string
+  }
   html: string
-}
+};
 
 export type Edge = {
   node: Node
-}
+};
 
 export type Edges = {
-  edges: Array<Edge>
-}
+  edges: Edge[]
+};
 
 export type AllMarkdownRemark = {
   allMarkdownRemark: Edges
-}
+};
 
-export type Item = {
-  slug: string,
-  title: string
-}
+// utils type
+export type CategoryList = {
+  [category: string]: {
+    [tag: string]: string
+  }
+};
 
-export type Menu = {
-  category: string,
-  items: Item[]
-}
+// sidebar width
+export const drawerWidth = '180px';

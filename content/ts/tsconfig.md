@@ -1,4 +1,7 @@
 ---
+path: "/ts/tsconfig"
+category: "技術別"
+tag: "TypeScript"
 title: "tsconfigに関するノウハウ"
 date: "2020-04-27"
 ---

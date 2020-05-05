@@ -1,14 +1,15 @@
 ---
-title: "TypeScript"
+path: "/ts/typescript"
+category: "技術別"
+tag: "TypeScript"
+title: "TypeScriptメモ"
 date: "2020-04-27"
 ---
 
-- TypeScriptの基本
-- [tsconfigのノウハウ](/ts/tsconfig)
+## Pick
 
+```js
 
-# Gatsby
+Pick<Node, 'frontmatter' | 'html'>
 
-createPageで設定するcontextは
-templateのgraphQLで$idで使用できる。
-
+```
