@@ -1,14 +1,14 @@
 ---
 path: "/others/todo"
 category: "その他"
-tag: "その他"
+tag: "TODO"
 title: "TODO一覧"
 date: "2020-04-27"
 ---
 
 ## 優先順位
 1. 記事のスタイルをカッコよくする(漠然)
-- スマホ対応(sidebarをハンバーガメニューとかreact.org風にする)
+2. スマホ対応(sidebarをハンバーガメニューとかreact.org風にする)
 - 日付の表示
 - headタグの設定(react-helmet導入？), titleの設定
 - topに更新履歴
@@ -19,7 +19,6 @@ date: "2020-04-27"
 - react, gatsbyをまとめる
 - eslintとtslintを整える
 - footerを設定？いるかどうかも含めて検討
-- 別タブリンク導入
 - 目次
 - style調整
   - markdownの間隔を広く

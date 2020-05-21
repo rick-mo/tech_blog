@@ -1,15 +1,20 @@
 import React, { FC } from 'react';
-import { makeStyles, Drawer, Theme, Typography, Divider } from '@material-ui/core';
+import { makeStyles, Drawer, Theme, Typography, Divider, List } from '@material-ui/core';
 import CustomLink from './CustomLink';
-import { drawerWidth, CategoryList } from '../types';
+import { drawerWidth } from '../types';
 import SideMenuList from './SideMenuList';
+import { categories } from '../data/categories';
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
   title: {
-    padding: theme.spacing(2)
+    color: theme.palette.common.white,
+    padding: theme.spacing(2),
+  },
+  drawerContainer: {
+    overflow: 'auto',
   },
 }));
 
@@ -17,11 +22,10 @@ type Props = {
   variant: "permanent" | "temporary"
   open: boolean
   onClose?: () => void
-  categoryList: CategoryList
   activePath: string
 };
 
-const SideMenuBar: FC<Props> = ({ variant, open, onClose, categoryList, activePath }) => {
+const SideMenuBar: FC<Props> = ({ variant, open, onClose, activePath }) => {
   const classes = useStyles();
 
   return (
@@ -33,18 +37,31 @@ const SideMenuBar: FC<Props> = ({ variant, open, onClose, categoryList, activePa
       open={open}
       onClose={onClose}
     >
-      <Typography className={classes.title} variant="h6">
-        <CustomLink to="/">Tech Memo</CustomLink>
-      </Typography>
+      <CustomLink to="/">
+        <Typography className={classes.title} variant="h6">
+          {'Tech Memo'}
+        </Typography>
+      </CustomLink>
       <Divider />
-      {Object.keys(categoryList).map((category, index) => (
-        <SideMenuList 
-          key={index} 
-          category={category} 
-          tagList={categoryList[category]} 
-          activePath={activePath} 
-        />
-      ))}
+      <List className={classes.drawerContainer} disablePadding>
+        {categories.map(({ id, items }) => (
+          <SideMenuList 
+            key={id} 
+            category={id} 
+            items={items} 
+            activePath={activePath}
+          />
+        ))}
+        <Typography variant="subtitle2" className={classes.title}>
+          {'© 2020 '}
+            <CustomLink 
+              to={'https://github.com/ricknigel'} 
+              external={true}
+            >
+              {'ricknigel'}
+            </CustomLink>
+          </Typography>
+      </List>
     </Drawer>
   );
 };

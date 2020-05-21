@@ -28,12 +28,5 @@ export type AllMarkdownRemark = {
   allMarkdownRemark: Edges
 };
 
-// utils type
-export type CategoryList = {
-  [category: string]: {
-    [tag: string]: string
-  }
-};
-
 // sidebar width
 export const drawerWidth = '180px';

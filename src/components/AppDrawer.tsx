@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { makeStyles, Theme, Hidden, Fab } from '@material-ui/core';
 import { UnfoldMore } from '@material-ui/icons';
-import { drawerWidth, CategoryList } from '../types';
+import { drawerWidth } from '../types';
 import SideMenuBar from './SideMenuBar';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,11 +22,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  categoryList: CategoryList
   activePath: string
 }
 
-const AppDrawer: FC<Props> = ({ categoryList, activePath }) => {
+const AppDrawer: FC<Props> = ({ activePath }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -40,7 +39,6 @@ const AppDrawer: FC<Props> = ({ categoryList, activePath }) => {
         <SideMenuBar 
           variant="temporary" 
           open={open} 
-          categoryList={categoryList} 
           activePath={activePath} 
           onClose={handleOpen} 
         />
@@ -49,7 +47,6 @@ const AppDrawer: FC<Props> = ({ categoryList, activePath }) => {
         <SideMenuBar 
           variant="permanent" 
           open={true} 
-          categoryList={categoryList} 
           activePath={activePath} 
         />
       </Hidden>

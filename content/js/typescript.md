@@ -1,7 +1,7 @@
 ---
-path: "/ts/typescript"
+path: "/js/typescript"
 category: "技術別"
-tag: "TypeScript"
+tag: "JavaScript"
 title: "TypeScriptメモ"
 date: "2020-04-27"
 ---

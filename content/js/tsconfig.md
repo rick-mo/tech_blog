@@ -1,7 +1,7 @@
 ---
-path: "/ts/tsconfig"
+path: "/js/tsconfig"
 category: "技術別"
-tag: "TypeScript"
+tag: "JavaScript"
 title: "tsconfigに関するノウハウ"
 date: "2020-04-27"
 ---

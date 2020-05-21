@@ -5,7 +5,8 @@ export const myTheme = createMuiTheme({
   palette: {
     type: 'light',
     text: {
-      primary: grey[700],
+      primary: grey[800],
+      secondary: grey[500]
     },
     background: {
       default: grey[200]
@@ -23,6 +24,35 @@ export const myTheme = createMuiTheme({
   shape: {
     borderRadius: 15
   },
+  overrides: {
+    MuiDrawer: {
+      paper: {
+        backgroundColor: '#23233c'
+      }
+    },
+    MuiDivider: {
+      root: {
+        backgroundColor: '#404854'
+      }
+    },
+    MuiListItem: {
+      root: {
+        '&$selected': {
+          borderRight: `2px solid ${blue[500]}`,
+          color: blue[500]
+        },
+      }
+    },
+    MuiListItemIcon: {
+      root: {
+        color: 'inherit',
+        minWidth: 0,
+        '& svg': {
+          fontSize: 20
+        }
+      }
+    }
+  }
 });
 
 export const markdownStyle = makeStyles((theme: Theme) => ({

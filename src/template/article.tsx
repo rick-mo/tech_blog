@@ -1,28 +1,26 @@
 import React, { FC } from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
-import { Node, Edges } from '../types';
+import { Node } from '../types';
 import MarkdownPage from '../components/MarkdownPage';
-import { getCategoryList } from '../utils/getCategoryList';
+import Header from '../components/Header';
 
 type Props = {
   data: {
     markdownRemark: Node,
-    allMarkdownRemark: Edges
   }
   location: Location
 };
 
-const Article: FC<Props> = ({ data, location }) => {
-  const node = data.markdownRemark;
-  const categoryList = getCategoryList(data.allMarkdownRemark);
-
-  return (
-    <Layout categoryList={categoryList} activePath={location.pathname}>
-      <MarkdownPage node={node} html={node.html} />
-    </Layout>
-  );
-};
+const Article: FC<Props> = ({ data, location }) => (
+  <Layout activePath={location.pathname}>
+    <Header tagName={data.markdownRemark.frontmatter.tag} />
+    <MarkdownPage 
+      node={data.markdownRemark} 
+      html={data.markdownRemark.html} 
+    />
+  </Layout>
+);
 
 export const query = graphql`
   query ($slug: String!) {
@@ -41,22 +39,6 @@ export const query = graphql`
         date
       }
       html
-    }
-    allMarkdownRemark {
-      edges {
-        node {
-          fields {
-            tagKey
-          }
-          frontmatter {
-            path
-            category
-            tag
-            title
-            date
-          }
-        }
-      }
     }
   }
 `

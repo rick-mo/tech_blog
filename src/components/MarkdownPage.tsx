@@ -16,12 +16,12 @@ const MarkdownPage: FC<Props> = ({ node, html }) => {
   return (
     <Card className={classes.markdown}>
       <CardHeader title={node.frontmatter.title} />
-      <CustomLink to={`/${node.fields.tagKey}`}>
+      {/* <CustomLink to={`/${node.fields.tagKey}`}>
         <Chip 
           clickable 
           label={node.frontmatter.tag} 
         />
-      </CustomLink>
+      </CustomLink> */}
       <Divider />
       <CardContent>
         <div dangerouslySetInnerHTML={{ __html: html }} />

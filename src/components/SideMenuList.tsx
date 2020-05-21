@@ -1,45 +1,55 @@
-import React, { FC } from 'react';
-import { List, makeStyles, ListSubheader, ListItem, ListItemText, Theme } from '@material-ui/core';
+import React, { FC, Fragment } from 'react';
+import { makeStyles, ListItem, ListItemText, Theme, Divider, ListItemIcon } from '@material-ui/core';
 import CustomLink from './CustomLink';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  drawerContainer: {
-    overflow: 'auto',
-    '& .Mui-selected': {
-      borderRight: `2px solid ${theme.palette.secondary.main}`,
-      color: theme.palette.secondary.main
-    }
+  categoryHeader: {
+    color: theme.palette.common.white,
   },
-  nested: {
-    paddingLeft: theme.spacing(4)
-  }
+  itemTextColor: {
+    color: theme.palette.text.secondary,
+  },
+  itemIcons: {
+    paddingRight: theme.spacing(2),
+  },
 }));
-
 
 type Props = {
   category: string
-  tagList: { [tag: string]: string },
+  items: {
+    id: string
+    to: string
+    icon: JSX.Element
+  }[]
   activePath: string
 };
 
-const SideMenuList: FC<Props> = ({ category, tagList, activePath }) => {
+const SideMenuList: FC<Props> = ({ category, items, activePath }) => {
   const classes = useStyles();
-  const activeTag = activePath.split('/')[1];
 
   return (
-    <List className={classes.drawerContainer}
-      subheader={
-        <ListSubheader>{category}</ListSubheader>
-      }
-    >
-      {Object.keys(tagList).sort().map((tag, index) => (
-        <CustomLink key={index} to={`/${tag}`}>
-          <ListItem className={classes.nested} button selected={activeTag === tag}>
-            <ListItemText primary={tagList[tag]} />
+    <Fragment>
+      <ListItem>
+        <ListItemText classes={{
+          primary: classes.categoryHeader
+        }}>{category}</ListItemText>
+      </ListItem>
+      {items.map(({ id, to, icon }) => (
+        <CustomLink 
+          className={classes.itemTextColor} 
+          key={id} 
+          to={to}
+        >
+          <ListItem button selected={activePath.includes(to)}>
+            <ListItemIcon className={classes.itemIcons}>
+              {icon}
+            </ListItemIcon>
+            <ListItemText>{id}</ListItemText>
           </ListItem>
         </CustomLink>
       ))}
-    </List>
+      <Divider />
+    </Fragment>
   );
 };
 

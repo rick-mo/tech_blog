@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider, CssBaseline, makeStyles, Theme } from '@material-ui/core';
 import AppDrawer from './AppDrawer';
-import { drawerWidth, CategoryList } from '../types';
+import { drawerWidth } from '../types';
 import { myTheme } from '../theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -16,18 +16,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  categoryList: CategoryList
   activePath?: string
 }
 
-const Layout: React.FC<Props> = ({ categoryList, activePath = '', children }) => {
+const Layout: React.FC<Props> = ({ activePath = '', children }) => {
   const classes = useStyles();
 
   return (
     <ThemeProvider theme={myTheme}>
       <div className={classes.root}>
         <CssBaseline />
-        <AppDrawer categoryList={categoryList} activePath={activePath} />
+        <AppDrawer activePath={activePath} />
         <main className={classes.content}>
           {children}
         </main>
