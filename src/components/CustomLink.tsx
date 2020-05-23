@@ -10,38 +10,40 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.secondary.main,
     },
     '&:visited': {
-      color: 'inherit'
+      color: 'inherit',
     },
   },
 }));
 
 type Props = {
-  to: string
-  external?: boolean,
-  className?: string
-}
+  to: string;
+  external?: boolean;
+  className?: string;
+};
 
-const CustomLink: FC<Props> = ({ to, external = false, className = '', children }) => {
+const CustomLink: FC<Props> = ({
+  to,
+  external = false,
+  className = '',
+  children,
+}) => {
   const classes = useStyles();
   return (
     <Fragment>
-      { external ? 
-        <a 
+      {external ? (
+        <a
           className={classes.link + ' ' + className}
-          href={to} 
-          target='_blank' 
-          rel='nofollow noopener noreferrer'
+          href={to}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
         >
           {children}
-        </a> 
-        : 
-        <Link 
-          className={classes.link + ' ' + className}
-          to={to}
-        >
+        </a>
+      ) : (
+        <Link className={classes.link + ' ' + className} to={to}>
           {children}
         </Link>
-      }
+      )}
     </Fragment>
   );
 };

@@ -2,7 +2,7 @@
 path: "/others/bookmark"
 category: "その他"
 tag: "参考記事"
-title: "参考記事まとめ"
+title: "参考リンク集"
 date: "2020-04-26"
 ---
 

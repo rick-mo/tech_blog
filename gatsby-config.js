@@ -12,15 +12,15 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,
-        path: `${__dirname}/src/pages`
-      }
+        path: `${__dirname}/src/pages`,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `content`,
-        path: `${__dirname}/content`
-      }
+        path: `${__dirname}/content`,
+      },
     },
     {
       resolve: `gatsby-transformer-remark`,
@@ -34,19 +34,19 @@ module.exports = {
               alias: {},
               showLineNumbers: true,
               noInlineHighlight: false,
-            }
+            },
           },
           {
-            resolve: `gatsby-remark-external-links`
-          }
-        ]
-      }
+            resolve: `gatsby-remark-external-links`,
+          },
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-typescript`,
       options: {
-        isTsx: true
-      }
-    }
-  ]
-}
+        isTsx: true,
+      },
+    },
+  ],
+};

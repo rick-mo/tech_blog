@@ -12,12 +12,12 @@ exports.onCreateNode = ({ node, actions }) => {
     createNodeField({
       node,
       name: 'tagKey',
-      value: tagKey
+      value: tagKey,
     });
     createNodeField({
       node,
       name: 'slug',
-      value: slug
+      value: slug,
     });
   }
 };
@@ -67,8 +67,8 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/${tag}`,
       context: {
         tag: tag,
-        tagName: tagList[tag]
-      }
+        tagName: tagList[tag],
+      },
     });
   });
 
@@ -77,8 +77,8 @@ exports.createPages = async ({ graphql, actions }) => {
       component: articleTemplate,
       path: node.frontmatter.path,
       context: {
-        slug: node.fields.slug
-      }
+        slug: node.fields.slug,
+      },
     });
   });
 };

@@ -7,26 +7,21 @@ import Header from '../components/Header';
 
 type Props = {
   data: {
-    markdownRemark: Node,
-  }
-  location: Location
+    markdownRemark: Node;
+  };
+  location: Location;
 };
 
 const Article: FC<Props> = ({ data, location }) => (
   <Layout activePath={location.pathname}>
     <Header tagName={data.markdownRemark.frontmatter.tag} />
-    <MarkdownPage 
-      node={data.markdownRemark} 
-      html={data.markdownRemark.html} 
-    />
+    <MarkdownPage node={data.markdownRemark} html={data.markdownRemark.html} />
   </Layout>
 );
 
 export const query = graphql`
-  query ($slug: String!) {
-    markdownRemark(fields: { 
-      slug: { eq: $slug }
-    }) {
+  query($slug: String!) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       fields {
         tagKey
         slug
@@ -41,6 +36,6 @@ export const query = graphql`
       html
     }
   }
-`
+`;
 
 export default Article;

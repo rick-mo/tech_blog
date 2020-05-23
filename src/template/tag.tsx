@@ -4,16 +4,16 @@ import { AllMarkdownRemark } from '../types';
 import CustomLink from '../components/CustomLink';
 import { graphql } from 'gatsby';
 import Header from '../components/Header';
-import { Grid, Typography, Divider, Card } from '@material-ui/core';
+import { Grid, Typography, Divider } from '@material-ui/core';
 
 type Props = {
-  data: AllMarkdownRemark
-  location: Location
+  data: AllMarkdownRemark;
+  location: Location;
   pageContext: {
-    tag: string
-    tagName: string
-  }
-}
+    tag: string;
+    tagName: string;
+  };
+};
 
 const Tag: FC<Props> = ({ data, location, pageContext }) => {
   const tagEdges = data.allMarkdownRemark.edges.filter(
@@ -58,6 +58,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
 export default Tag;

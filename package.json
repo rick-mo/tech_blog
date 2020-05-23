@@ -1,5 +1,5 @@
 {
-  "name": "tech_blog",
+  "name": "tech_memo",
   "private": true,
   "description": "",
   "version": "0.1.0",
@@ -7,7 +7,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,md}\"",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -33,9 +33,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rick-mo/tech_blog"
+    "url": "https://github.com/ricknigel/tech_memo"
   },
   "bugs": {
-    "url": "https://github.com/rick-mo/tech_blog/issues"
+    "url": "https://github.com/ricknigel/tech_memo/issues"
   }
 }

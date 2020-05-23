@@ -1,5 +1,12 @@
 import React, { FC } from 'react';
-import { makeStyles, Drawer, Theme, Typography, Divider, List } from '@material-ui/core';
+import {
+  makeStyles,
+  Drawer,
+  Theme,
+  Typography,
+  Divider,
+  List,
+} from '@material-ui/core';
 import CustomLink from './CustomLink';
 import { drawerWidth } from '../types';
 import SideMenuList from './SideMenuList';
@@ -19,20 +26,20 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  variant: "permanent" | "temporary"
-  open: boolean
-  onClose?: () => void
-  activePath: string
+  variant: 'permanent' | 'temporary';
+  open: boolean;
+  onClose?: () => void;
+  activePath: string;
 };
 
 const SideMenuBar: FC<Props> = ({ variant, open, onClose, activePath }) => {
   const classes = useStyles();
 
   return (
-    <Drawer 
-      variant={variant} 
+    <Drawer
+      variant={variant}
       classes={{
-        paper: classes.drawerPaper
+        paper: classes.drawerPaper,
       }}
       open={open}
       onClose={onClose}
@@ -45,22 +52,19 @@ const SideMenuBar: FC<Props> = ({ variant, open, onClose, activePath }) => {
       <Divider />
       <List className={classes.drawerContainer} disablePadding>
         {categories.map(({ id, items }) => (
-          <SideMenuList 
-            key={id} 
-            category={id} 
-            items={items} 
+          <SideMenuList
+            key={id}
+            category={id}
+            items={items}
             activePath={activePath}
           />
         ))}
         <Typography variant="subtitle2" className={classes.title}>
           {'© 2020 '}
-            <CustomLink 
-              to={'https://github.com/ricknigel'} 
-              external={true}
-            >
-              {'ricknigel'}
-            </CustomLink>
-          </Typography>
+          <CustomLink to={'https://github.com/ricknigel'} external={true}>
+            {'ricknigel'}
+          </CustomLink>
+        </Typography>
       </List>
     </Drawer>
   );

@@ -9,21 +9,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
-    }
+    },
   },
   smallScreenSideBar: {
     [theme.breakpoints.up('sm')]: {
-      display: 'none'
+      display: 'none',
     },
     position: 'fixed',
     right: theme.spacing(5),
     bottom: theme.spacing(5),
-  }
+  },
 }));
 
 type Props = {
-  activePath: string
-}
+  activePath: string;
+};
 
 const AppDrawer: FC<Props> = ({ activePath }) => {
   const classes = useStyles();
@@ -36,26 +36,22 @@ const AppDrawer: FC<Props> = ({ activePath }) => {
   return (
     <nav className={classes.drawer}>
       <Hidden smUp>
-        <SideMenuBar 
-          variant="temporary" 
-          open={open} 
-          activePath={activePath} 
-          onClose={handleOpen} 
+        <SideMenuBar
+          variant="temporary"
+          open={open}
+          activePath={activePath}
+          onClose={handleOpen}
         />
       </Hidden>
       <Hidden xsDown>
-        <SideMenuBar 
-          variant="permanent" 
-          open={true} 
-          activePath={activePath} 
-        />
+        <SideMenuBar variant="permanent" open={true} activePath={activePath} />
       </Hidden>
       <div className={classes.smallScreenSideBar}>
-        {!open && 
+        {!open && (
           <Fab size="large" onClick={handleOpen}>
             <UnfoldMore color="secondary" fontSize="large" />
           </Fab>
-        }
+        )}
       </div>
     </nav>
   );

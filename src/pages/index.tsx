@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import Layout from '../components/Layout';
 import { AllMarkdownRemark } from '../types';
 
 type Props = {
-  data: AllMarkdownRemark
+  data: AllMarkdownRemark;
 };
 
 const IndexPage: FC<Props> = () => (

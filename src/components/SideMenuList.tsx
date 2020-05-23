@@ -1,5 +1,12 @@
 import React, { FC, Fragment } from 'react';
-import { makeStyles, ListItem, ListItemText, Theme, Divider, ListItemIcon } from '@material-ui/core';
+import {
+  makeStyles,
+  ListItem,
+  ListItemText,
+  Theme,
+  Divider,
+  ListItemIcon,
+} from '@material-ui/core';
 import CustomLink from './CustomLink';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,13 +22,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  category: string
+  category: string;
   items: {
-    id: string
-    to: string
-    icon: JSX.Element
-  }[]
-  activePath: string
+    id: string;
+    to: string;
+    icon: JSX.Element;
+  }[];
+  activePath: string;
 };
 
 const SideMenuList: FC<Props> = ({ category, items, activePath }) => {
@@ -30,20 +37,18 @@ const SideMenuList: FC<Props> = ({ category, items, activePath }) => {
   return (
     <Fragment>
       <ListItem>
-        <ListItemText classes={{
-          primary: classes.categoryHeader
-        }}>{category}</ListItemText>
+        <ListItemText
+          classes={{
+            primary: classes.categoryHeader,
+          }}
+        >
+          {category}
+        </ListItemText>
       </ListItem>
       {items.map(({ id, to, icon }) => (
-        <CustomLink 
-          className={classes.itemTextColor} 
-          key={id} 
-          to={to}
-        >
+        <CustomLink className={classes.itemTextColor} key={id} to={to}>
           <ListItem button selected={activePath.includes(to)}>
-            <ListItemIcon className={classes.itemIcons}>
-              {icon}
-            </ListItemIcon>
+            <ListItemIcon className={classes.itemIcons}>{icon}</ListItemIcon>
             <ListItemText>{id}</ListItemText>
           </ListItem>
         </CustomLink>
